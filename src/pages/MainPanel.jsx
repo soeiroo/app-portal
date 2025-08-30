@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { auth } from '../firebase';
+import { useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/MainPanel.module.css';
+import { NavPanel } from '../components/NavPanel';
 
 
 function MainPanel () {
@@ -35,6 +35,7 @@ function MainPanel () {
 
   return (
     <div className='styles.container'>
+      <NavPanel />
       <h1>Main Panel</h1>
 
       <div>

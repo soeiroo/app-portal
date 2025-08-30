@@ -1,0 +1,15 @@
+:root {
+  --color-nav-bg: #111111;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #9ca3af;
+  --color-hover-bg: #1f2937;
+  --color-hover-text: #3b82f6;
+  --color-active: #6a11cb;
+  --color-error: #ef4444;
+  --color-success: #10b981;
+}
+
+
+body {
+  background-color: var(--color-nav-bg);
+}

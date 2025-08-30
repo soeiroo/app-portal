@@ -41,13 +41,11 @@ function LoginRegisterForm (){
 
       if (isRegister) {
         await register(email, password);
-
         setIsRegister(false);
-        alert(`Registered with: ${email}, ${password}`);
+        
       } else {
         await login(email, password);
-        
-        alert(`Logged in with: ${email}, ${password}`);
+
       }
     } catch (error) {
       console.error('Error during authentication:', error);
