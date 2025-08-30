@@ -107,13 +107,36 @@ body {
   cursor: pointer;
   margin-top: 0.5rem;
   box-shadow: 0 2px 8px rgba(99,102,241,0.08);
-  transition: all 0.2s;
-  transform: all 0.2s;
+  background-size: 200% 100%;
+  background-position: right;
+  transition: background-position 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s, transform 0.2s;
 }
 
-.login-button:hover {
-  background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+.login-button:hover,
+.login-button:focus {
+  background-position: left;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.18);
   transform: scale(1.01);
+}
+
+.login-btn {
+  background: linear-gradient(90deg, #4f8cff 0%, #6ee7b7 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-size: 200% 100%;
+  background-position: right;
+  transition: background-position 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.15);
+}
+
+.login-btn:hover,
+.login-btn:focus {
+  background-position: left;
+  box-shadow: 0 4px 16px rgba(79, 140, 255, 0.25);
 }
 
 .signup-text {

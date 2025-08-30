@@ -10,6 +10,16 @@ function LoginRegisterForm (){
   const [password, setPassword] = useState('');
   const [isRegister, setIsRegister] = useState(false);
   const { user, login, register, loading } = useAuth();
+  
+  
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user) {
+      navigate('/main');
+    }
+  }, [user, navigate]);
+
+
   if (loading) {
     return (
       <div className={styles['loader-wrapper']}>
@@ -22,13 +32,7 @@ function LoginRegisterForm (){
       </div>
     );
   }
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user) {
-      navigate('/main');
-    }
-  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
