@@ -18,21 +18,21 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     setLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 600)); // delay artificial
+    await new Promise(resolve => setTimeout(resolve, 300)); // delay artificial
     await signInWithEmailAndPassword(auth, email, password);
     // loading será setado para false pelo onAuthStateChanged
   };
 
   const register = async (email, password) => {
     setLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 600)); // delay artificial
+    await new Promise(resolve => setTimeout(resolve, 300)); // delay artificial
     await createUserWithEmailAndPassword(auth, email, password);
     // loading será setado para false pelo onAuthStateChanged
   };
 
   const logout = async () => {
     setLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 600));
+    await new Promise(resolve => setTimeout(resolve, 300));
     await signOut(auth);
     setUser(null);
   };
