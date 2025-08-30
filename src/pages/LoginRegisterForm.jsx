@@ -1,26 +1,48 @@
-import { useState } from 'react';
-import styles from './LoginForm.module.css';
+import { useEffect, useState } from 'react';
+import styles from '../styles/LoginForm.module.css';
 import { Link } from 'react-router-dom';
-import { auth } from '../firebase'; // Adjust the import path as necessary
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext.jsx';
 
 
-function LoginForm (){
+function LoginRegisterForm (){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isRegister, setIsRegister] = useState(false);
-  const [user, setUser] = useState(null);
+  const { user, login, register, loading } = useAuth();
+  if (loading) {
+    return (
+      <div className={styles['loader-wrapper']}>
+        <div className={styles['newtons-cradle']}>
+          <div className={styles['newtons-cradle__dot']}></div>
+          <div className={styles['newtons-cradle__dot']}></div>
+          <div className={styles['newtons-cradle__dot']}></div>
+          <div className={styles['newtons-cradle__dot']}></div>
+        </div>
+      </div>
+    );
+  }
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/main');
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      
+
       if (isRegister) {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        setUser(userCredential.user);
+        await register(email, password);
+
+        setIsRegister(false);
         alert(`Registered with: ${email}, ${password}`);
       } else {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        setUser(userCredential.user);
+        await login(email, password);
+        
         alert(`Logged in with: ${email}, ${password}`);
       }
     } catch (error) {
@@ -29,27 +51,7 @@ function LoginForm (){
     }
   }
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      setUser(null);
-      alert('Você deslogou com sucesso.');
-    } catch (error) {
-      console.error('Error during logout:', error);
-      alert('Logout error:', error.message);
-    }
-  }
 
-  if (user) {
-    return (
-      <div className={styles.container}>
-        <div className={styles['login-box']}>
-          <h2 className={styles['login-title']}>Welcome, {user.email}</h2>
-          <button onClick={handleLogout} className={styles['logout-button']}>Logout</button>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className={styles.container}>
@@ -91,4 +93,4 @@ function LoginForm (){
   );
 }
 
-export default LoginForm;
+export default LoginRegisterForm;
