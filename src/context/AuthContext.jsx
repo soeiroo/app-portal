@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../firebase';
-import { signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 
 const AuthContext = createContext();
 
@@ -37,13 +37,23 @@ export function AuthProvider({ children }) {
     setUser(null);
   };
 
+  const resetPassword = async (email) => {
+    await sendPasswordResetEmail(auth, email);
+    console.log('Password reset email sent to ' + email);
+  }
+
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, resetPassword }}>
       {children}
     </AuthContext.Provider>
   );
+  
 }
 
-export function useAuth() { 
-  return useContext(AuthContext);
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) throw new Error('useAuth must be used within an AuthProvider');
+  return context;
 }
