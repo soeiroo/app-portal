@@ -9,7 +9,143 @@
   --color-success: #10b981;
 }
 
+.nav {
+  background: var(--color-nav-bg);
+  color: var(--color-text-primary);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
 
-body {
-  background-color: var(--color-nav-bg);
+.navLeft,
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.link {
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+  background: none;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: var(--color-text-primary);
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.link:hover {
+  color: var(--color-hover-text);
+  background-color: var(--color-hover-bg);
+}
+
+/* Popup usuário */
+.popupHeader {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-bottom: 1px solid #333;
+  margin-bottom: 8px;
+}
+
+.userBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.userName {
+  font-size: 14px;
+  color: var(--color-text-primary);
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Dropdown */
+.popup {
+  position: relative;
+  cursor: pointer;
+}
+
+.popupMain {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #1c1c1c;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 8px 0;
+  min-width: 200px;
+  display: none;
+  z-index: 100;
+}
+
+.popupOpen {
+  display: block;
+}
+
+.listBox {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.item:hover {
+  background: #333;
+}
+
+.quit {
+  color: #ff5555;
+}
+
+/* ===================== MOBILE ===================== */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 16px;
+  }
+
+  .navLeft,
+  .navRight {
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .userName {
+    font-size: 12px;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .popupMain {
+    right: auto;
+    left: 0;
+    width: 100%;
+    min-width: unset;
+  }
+
+  .item {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
 }
